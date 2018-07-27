@@ -17,9 +17,9 @@ class MyApp extends StatelessWidget {
         // "hot reload" (press "r" in the console where you ran "flutter run",
         // or press Run > Flutter Hot Reload in IntelliJ). Notice that the
         // counter didn't reset back to zero; the application is not restarted.
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.red,
       ),
-      home: new MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(title: 'Игра мафия'),
     );
   }
 }
@@ -45,7 +45,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
-  void _incrementCounter() {
+  void _onBeginRolesDistributionPressed() {
     setState(() {
       // This call to setState tells the Flutter framework that something has
       // changed in this State, which causes it to rerun the build method below
@@ -89,21 +89,30 @@ class _MyHomePageState extends State<MyHomePage> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            new Text(
-              'You have pushed the button this many times:',
+            Container(
+              margin: const EdgeInsets.all(10.0),
+              child: RaisedButton (
+                child: const Text('Начать раздачу ролей'),
+                onPressed: _onBeginRolesDistributionPressed,
+              ),
             ),
-            new Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.display1,
+            Container(
+              margin: const EdgeInsets.all(10.0),
+              child: RaisedButton (
+                child: const Text('Начать раздачу номерков'),
+                onPressed: _onBeginRolesDistributionPressed,
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.all(10.0),
+              child: RaisedButton (
+                child: const Text('Начать раздачу ролей'),
+                onPressed: _onBeginRolesDistributionPressed,
+              ),
             ),
           ],
         ),
       ),
-      floatingActionButton: new FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: new Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
