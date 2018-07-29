@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'SelectCards.dart';
 
 void main() => runApp(new MyApp());
 
@@ -26,7 +27,6 @@ class MyApp extends StatelessWidget {
 
 class MyHomePage extends StatelessWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
-
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
   // how it looks.
@@ -40,8 +40,10 @@ class MyHomePage extends StatelessWidget {
 
   static const double margins = 6.0;
 
-  void _navigate(String screenName) {
-
+  void _navigate(BuildContext context, String screenName) {
+    Navigator.of(context).push(
+      MaterialPageRoute(builder: (context) => SelectCardsScreen(screenName: screenName))
+    );
   }
 
   @override
@@ -75,21 +77,21 @@ class MyHomePage extends StatelessWidget {
               margin: const EdgeInsets.all(margins),
               child: RaisedButton (
                 child: const Text('Начать раздачу ролей'),
-                onPressed: (){_navigate('RolesScreen');}
+                onPressed: (){_navigate(context, 'Раздача ролей');}
               ),
             ),
             Container(
               margin: const EdgeInsets.all(margins),
               child: RaisedButton (
                 child: const Text('Начать раздачу номерков'),
-                onPressed: () {_navigate('NumbersScreen');},
+                onPressed: () {_navigate(context, 'Раздача номерков');},
               ),
             ),
             Container(
               margin: const EdgeInsets.all(margins),
               child: RaisedButton (
                 child: const Text('Начать новую игру'),
-                onPressed: () {_navigate('NewGameScreen');}
+                onPressed: () {_navigate(context, 'NewGameScreen');}
               ),
             ),
           ],
