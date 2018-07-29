@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatefulWidget {
+class MyHomePage extends StatelessWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
 
   // This widget is the home page of your application. It is stateful, meaning
@@ -38,37 +38,19 @@ class MyHomePage extends StatefulWidget {
 
   final String title;
 
-  @override
-  _MyHomePageState createState() => new _MyHomePageState();
-}
+  static const double margins = 6.0;
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  void _navigate(String screenName) {
 
-  void _onBeginRolesDistributionPressed() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
   }
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return new Scaffold(
       appBar: new AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: new Text(widget.title),
+        title: new Text(title),
       ),
       body: new Center(
         // Center is a layout widget. It takes a single child and positions it
@@ -90,24 +72,24 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Container(
-              margin: const EdgeInsets.all(10.0),
+              margin: const EdgeInsets.all(margins),
               child: RaisedButton (
                 child: const Text('Начать раздачу ролей'),
-                onPressed: _onBeginRolesDistributionPressed,
+                onPressed: (){_navigate('RolesScreen');}
               ),
             ),
             Container(
-              margin: const EdgeInsets.all(10.0),
+              margin: const EdgeInsets.all(margins),
               child: RaisedButton (
                 child: const Text('Начать раздачу номерков'),
-                onPressed: _onBeginRolesDistributionPressed,
+                onPressed: () {_navigate('NumbersScreen');},
               ),
             ),
             Container(
-              margin: const EdgeInsets.all(10.0),
+              margin: const EdgeInsets.all(margins),
               child: RaisedButton (
-                child: const Text('Начать раздачу ролей'),
-                onPressed: _onBeginRolesDistributionPressed,
+                child: const Text('Начать новую игру'),
+                onPressed: () {_navigate('NewGameScreen');}
               ),
             ),
           ],
