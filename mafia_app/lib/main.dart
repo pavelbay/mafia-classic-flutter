@@ -40,7 +40,7 @@ class MyHomePage extends StatelessWidget {
 
   static const double margins = 6.0;
 
-  void _navigate(BuildContext context, String screenName) {
+  void _navigateToSelectCards(BuildContext context, String screenName) {
     Navigator.of(context).push(
       MaterialPageRoute(builder: (context) => SelectCardsScreen(screenName: screenName))
     );
@@ -77,21 +77,21 @@ class MyHomePage extends StatelessWidget {
               margin: const EdgeInsets.all(margins),
               child: RaisedButton (
                 child: const Text('Начать раздачу ролей'),
-                onPressed: (){_navigate(context, 'Раздача ролей');}
+                onPressed: (){_navigateToSelectCards(context, 'Раздача ролей');}
               ),
             ),
             Container(
               margin: const EdgeInsets.all(margins),
               child: RaisedButton (
                 child: const Text('Начать раздачу номерков'),
-                onPressed: () {_navigate(context, 'Раздача номерков');},
+                onPressed: () {_navigateToSelectCards(context, 'Раздача номерков');},
               ),
             ),
             Container(
               margin: const EdgeInsets.all(margins),
               child: RaisedButton (
                 child: const Text('Начать новую игру'),
-                onPressed: () {_navigate(context, 'NewGameScreen');}
+                onPressed: () { }// TODO: implement this
               ),
             ),
           ],
