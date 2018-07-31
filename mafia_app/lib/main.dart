@@ -100,3 +100,5 @@ class MyHomePage extends StatelessWidget {
     );
   }
 }
+
+enum GameRole { CITIZEN, MAFIA, DON, SHERIFF }
