@@ -1,17 +1,23 @@
 import 'package:flutter/material.dart';
-
+import 'dart:developer';
 import 'main.dart';
 
 const SCREEN_NAME_NUMBERS = 'ScreenNamesNumbers';
 const SCREEN_NAME_ROLES = 'ScreenNamesRoles';
+const LIST_SIZE = 10;
 
 class SelectCardsScreen extends StatefulWidget {
-  final String screenName;
+  final screenName;
+  final screenNameKey;
 
-  SelectCardsScreen({Key key, this.screenName});
+  SelectCardsScreen(String screenNameKey, {Key key})
+      : screenName = screenNameKey == SCREEN_NAME_ROLES
+            ? 'Раздача ролей'
+            : 'Раздача номерков',
+      this.screenNameKey = screenNameKey;
 
   @override
-  State createState() => SelectCardsState(selectCardFactory(this.screenName));
+  State createState() => SelectCardsState(selectCardFactory(this.screenNameKey));
 }
 
 class SelectCardsState extends State<SelectCardsScreen> {
@@ -21,8 +27,6 @@ class SelectCardsState extends State<SelectCardsScreen> {
     _selectCard = selectCard;
     _selectCard.fillList();
   }
-
-  static const listSize = 10;
 
   var _currentCardNumber = 0;
   var _shouldFrontBeNext = false;
@@ -37,20 +41,18 @@ class SelectCardsState extends State<SelectCardsScreen> {
   }
 
   void _onImageClick() {
-    _shouldFrontBeNext =
-        !_shouldFrontBeNext && _currentCardNumber < listSize - 1;
-
-    setState(() {
-      if (_shouldFrontBeNext) {
-        _currentCardNumber++;
-      }
-    });
+    _shouldFrontBeNext = !_shouldFrontBeNext;
+    if (_currentCardNumber < LIST_SIZE || !_shouldFrontBeNext) {
+      setState(() {});
+    }
   }
 
   String _getImagePath() {
     var imagePath;
+    debugPrint('CurrentCardNumber: $_currentCardNumber');
     if (_shouldFrontBeNext) {
       imagePath = _selectCard.getImagePath(_currentCardNumber);
+      _currentCardNumber++;
     } else {
       imagePath = 'graphics/ic_back.png';
     }
@@ -99,6 +101,7 @@ class SelectCardsState extends State<SelectCardsScreen> {
 
 abstract class SelectCard {
   void fillList();
+
   String getImagePath(int cardNumber);
 }
 
@@ -109,8 +112,8 @@ class SelectNumberCard implements SelectCard {
   void fillList() {
     _numbers.clear();
 
-    for (var i = 1; i<=10; i++) {
-      _numbers[i] = i;
+    for (var i = 1; i <= LIST_SIZE; i++) {
+      _numbers.add(i);
     }
 
     _numbers.shuffle();
@@ -118,9 +121,53 @@ class SelectNumberCard implements SelectCard {
 
   @override
   String getImagePath(int cardNumber) {
-    return null;
-  }
+    var imagePath;
+    final number = _numbers[cardNumber];
+    final basePath = 'graphics/numbers';
+    switch (number) {
+      case 1:
+        imagePath = 'graphics/ic_1.png';
+        break;
 
+      case 2:
+        imagePath = 'graphics/ic_2.png';
+        break;
+
+      case 3:
+        imagePath = 'graphics/ic_3.png';
+        break;
+
+      case 4:
+        imagePath = 'graphics/ic_4.png';
+        break;
+
+      case 5:
+        imagePath = 'graphics/ic_5.png';
+        break;
+
+      case 6:
+        imagePath = 'graphics/ic_6.png';
+        break;
+
+      case 7:
+        imagePath = 'graphics/ic_7.png';
+        break;
+
+      case 8:
+        imagePath = 'graphics/ic_8.png';
+        break;
+
+      case 9:
+        imagePath = 'graphics/ic_9.png';
+        break;
+
+      case 10:
+        imagePath = 'graphics/ic_10.png';
+        break;
+    }
+
+    return imagePath;
+  }
 }
 
 class SelectRoleCard implements SelectCard {
@@ -134,7 +181,7 @@ class SelectRoleCard implements SelectCard {
       _roles.add(GameRole.CITIZEN);
     }
 
-    for (var i = 0; i < 3; i++) {
+    for (var i = 0; i < 2; i++) {
       _roles.add(GameRole.MAFIA);
     }
 
@@ -146,6 +193,7 @@ class SelectRoleCard implements SelectCard {
   @override
   String getImagePath(int cardNumber) {
     var imagePath;
+    final basePath = 'graphics/roles';
     final role = _roles[cardNumber];
 
     switch (role) {

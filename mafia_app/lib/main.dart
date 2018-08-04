@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'select_card.dart';
 
 void main() => runApp(new MyApp());
@@ -42,7 +43,7 @@ class MyHomePage extends StatelessWidget {
 
   void _navigateToSelectCards(BuildContext context, String screenName) {
     Navigator.of(context).push(
-      MaterialPageRoute(builder: (context) => SelectCardsScreen(screenName: screenName))
+      MaterialPageRoute(builder: (context) => SelectCardsScreen(screenName))
     );
   }
 
@@ -77,14 +78,14 @@ class MyHomePage extends StatelessWidget {
               margin: const EdgeInsets.all(margins),
               child: RaisedButton (
                 child: const Text('Начать раздачу ролей'),
-                onPressed: (){_navigateToSelectCards(context, 'Раздача ролей');}
+                onPressed: (){_navigateToSelectCards(context, SCREEN_NAME_ROLES);}
               ),
             ),
             Container(
               margin: const EdgeInsets.all(margins),
               child: RaisedButton (
                 child: const Text('Начать раздачу номерков'),
-                onPressed: () {_navigateToSelectCards(context, 'Раздача номерков');},
+                onPressed: () {_navigateToSelectCards(context, SCREEN_NAME_NUMBERS);},
               ),
             ),
             Container(
