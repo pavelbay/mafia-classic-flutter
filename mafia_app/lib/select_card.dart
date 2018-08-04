@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'dart:developer';
+import 'package:flutter/rendering.dart';
+
 import 'main.dart';
 
 const SCREEN_NAME_NUMBERS = 'ScreenNamesNumbers';
@@ -14,10 +15,11 @@ class SelectCardsScreen extends StatefulWidget {
       : screenName = screenNameKey == SCREEN_NAME_ROLES
             ? 'Раздача ролей'
             : 'Раздача номерков',
-      this.screenNameKey = screenNameKey;
+        this.screenNameKey = screenNameKey;
 
   @override
-  State createState() => SelectCardsState(selectCardFactory(this.screenNameKey));
+  State createState() =>
+      SelectCardsState(selectCardFactory(this.screenNameKey));
 }
 
 class SelectCardsState extends State<SelectCardsScreen> {
@@ -41,6 +43,7 @@ class SelectCardsState extends State<SelectCardsScreen> {
   }
 
   void _onImageClick() {
+//    debugDumpRenderTree();
     _shouldFrontBeNext = !_shouldFrontBeNext;
     if (_currentCardNumber < LIST_SIZE || !_shouldFrontBeNext) {
       setState(() {});
@@ -60,18 +63,56 @@ class SelectCardsState extends State<SelectCardsScreen> {
     return imagePath;
   }
 
+  Widget _buildThumbnails() {
+    return ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (context, i) {
+          if (i < LIST_SIZE) {
+            return _buildColumn(i);
+          }
+        });
+  }
+
+  Widget _buildColumn(int index) {
+    return Container(
+      child: new IconTheme(
+        data: new IconThemeData(color: Colors.white),
+        child: _buildIcon(index),
+      ),
+    );
+  }
+
+  Widget _buildIcon(int index) {
+    if (_currentCardNumber > index) {
+      return Icon(Icons.clear);
+    } else {
+      return Icon(Icons.add);
+    }
+  }
+
   Widget _buildBody() {
     final imagePath = _getImagePath();
-
     return GestureDetector(
       onTap: _onImageClick,
-      child: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            fit: BoxFit.fill,
-            image: AssetImage(imagePath),
+      child: Stack(
+        children: <Widget>[
+          Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                fit: BoxFit.fill,
+                image: AssetImage(imagePath),
+              ),
+            ),
           ),
-        ),
+          Positioned(
+            left: 60.0,
+            right: 270.0,
+            child: Container(
+              height: 40.0,
+              child: _buildThumbnails(),
+            ),
+          ),
+        ],
       ),
     );
   }
