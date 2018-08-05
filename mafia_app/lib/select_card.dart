@@ -30,23 +30,28 @@ class SelectCardsState extends State<SelectCardsScreen> {
     _selectCard.fillList();
   }
 
+  static const DEFAULT_IMAGE_PATH = 'graphics/ic_back.png';
+
   var _currentCardNumber = 0;
   var _shouldFrontBeNext = false;
   var _scaffoldContext;
+  var _imagePath = DEFAULT_IMAGE_PATH;
 
   void _restart() {
     setState(() {
       _currentCardNumber = 0;
       _shouldFrontBeNext = false;
+      _imagePath = DEFAULT_IMAGE_PATH;
       _selectCard.fillList();
     });
   }
 
   void _onImageClick() {
-//    debugDumpRenderTree();
-    _shouldFrontBeNext = !_shouldFrontBeNext;
-    if (_currentCardNumber < LIST_SIZE || !_shouldFrontBeNext) {
-      setState(() {});
+    if (_currentCardNumber < LIST_SIZE || _shouldFrontBeNext) {
+      setState(() {
+        _shouldFrontBeNext = !_shouldFrontBeNext;
+        _imagePath = _getImagePath();
+      });
     }
   }
 
@@ -91,7 +96,6 @@ class SelectCardsState extends State<SelectCardsScreen> {
   }
 
   Widget _buildBody() {
-    final imagePath = _getImagePath();
     return GestureDetector(
       onTap: _onImageClick,
       child: Stack(
@@ -100,7 +104,7 @@ class SelectCardsState extends State<SelectCardsScreen> {
             decoration: BoxDecoration(
               image: DecorationImage(
                 fit: BoxFit.fill,
-                image: AssetImage(imagePath),
+                image: AssetImage(_imagePath),
               ),
             ),
           ),
