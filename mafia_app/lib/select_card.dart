@@ -62,7 +62,7 @@ class SelectCardsState extends State<SelectCardsScreen> {
       imagePath = _selectCard.getImagePath(_currentCardNumber);
       _currentCardNumber++;
     } else {
-      imagePath = 'graphics/ic_back.png';
+      imagePath = DEFAULT_IMAGE_PATH;
     }
 
     return imagePath;
@@ -96,17 +96,19 @@ class SelectCardsState extends State<SelectCardsScreen> {
   }
 
   Widget _buildBody() {
+    final image = Image.asset(
+        _imagePath,
+        fit: BoxFit.cover,
+        gaplessPlayback: true
+    );
     return GestureDetector(
       onTap: _onImageClick,
       child: Stack(
         children: <Widget>[
           Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                fit: BoxFit.fill,
-                image: AssetImage(_imagePath),
-              ),
-            ),
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            child: image,
           ),
           Positioned(
             left: 60.0,
