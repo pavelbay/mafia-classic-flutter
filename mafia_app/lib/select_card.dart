@@ -110,11 +110,11 @@ class SelectCardsState extends State<SelectCardsScreen> {
             height: MediaQuery.of(context).size.height,
             child: image,
           ),
-          Positioned(
-            left: 60.0,
-            right: 270.0,
+          Align(
+            alignment: AlignmentDirectional.topCenter,
             child: Container(
               height: 40.0,
+              width: 250.0,
               child: _buildThumbnails(),
             ),
           ),
