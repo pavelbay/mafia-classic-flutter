@@ -19,6 +19,23 @@ class MyApp extends StatelessWidget {
   }
 }
 
+class MyRoute<T> extends MaterialPageRoute<T> {
+  MyRoute({ WidgetBuilder builder, RouteSettings settings })
+      : super(builder: builder, settings: settings);
+
+  @override
+  Widget buildTransitions(BuildContext context, Animation<double> animation,
+      Animation<double> secondaryAnimation, Widget child) {
+      if (settings.isInitialRoute)
+        return child;
+      final anim = Tween<Offset>(
+        begin: Offset(1.0, 0.0),
+        end: Offset.zero
+      ).animate(animation);
+      return SlideTransition(position: anim, child: child);
+  }
+}
+
 class MyHomePage extends StatelessWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
 
@@ -28,7 +45,7 @@ class MyHomePage extends StatelessWidget {
 
   void _navigateToSelectCards(BuildContext context, String screenName) {
     Navigator.of(context).push(
-      MaterialPageRoute(builder: (context) => SelectCardsScreen(screenName))
+        MyRoute(builder: (context) => SelectCardsScreen(screenName))
     );
   }
 

@@ -6,6 +6,7 @@ import 'main.dart';
 const SCREEN_NAME_NUMBERS = 'ScreenNamesNumbers';
 const SCREEN_NAME_ROLES = 'ScreenNamesRoles';
 const LIST_SIZE = 10;
+const IMAGE_ASSET_PATH = 'graphics';
 
 class SelectCardsScreen extends StatefulWidget {
   final screenName;
@@ -30,7 +31,7 @@ class SelectCardsState extends State<SelectCardsScreen> {
     _selectCard.fillList();
   }
 
-  static const DEFAULT_IMAGE_PATH = 'graphics/ic_back.png';
+  static const DEFAULT_IMAGE_PATH = '$IMAGE_ASSET_PATH/ic_back.png';
 
   var _currentCardNumber = 0;
   var _shouldFrontBeNext = false;
@@ -170,46 +171,46 @@ class SelectNumberCard implements SelectCard {
   String getImagePath(int cardNumber) {
     var imagePath;
     final number = _numbers[cardNumber];
-    final basePath = 'graphics/numbers';
+    final basePath = '$IMAGE_ASSET_PATH/numbers';
     switch (number) {
       case 1:
-        imagePath = 'graphics/ic_1.png';
+        imagePath = '$IMAGE_ASSET_PATH/ic_1.png';
         break;
 
       case 2:
-        imagePath = 'graphics/ic_2.png';
+        imagePath = '$IMAGE_ASSET_PATH/ic_2.png';
         break;
 
       case 3:
-        imagePath = 'graphics/ic_3.png';
+        imagePath = '$IMAGE_ASSET_PATH/ic_3.png';
         break;
 
       case 4:
-        imagePath = 'graphics/ic_4.png';
+        imagePath = '$IMAGE_ASSET_PATH/ic_4.png';
         break;
 
       case 5:
-        imagePath = 'graphics/ic_5.png';
+        imagePath = '$IMAGE_ASSET_PATH/ic_5.png';
         break;
 
       case 6:
-        imagePath = 'graphics/ic_6.png';
+        imagePath = '$IMAGE_ASSET_PATH/ic_6.png';
         break;
 
       case 7:
-        imagePath = 'graphics/ic_7.png';
+        imagePath = '$IMAGE_ASSET_PATH/ic_7.png';
         break;
 
       case 8:
-        imagePath = 'graphics/ic_8.png';
+        imagePath = '$IMAGE_ASSET_PATH/ic_8.png';
         break;
 
       case 9:
-        imagePath = 'graphics/ic_9.png';
+        imagePath = '$IMAGE_ASSET_PATH/ic_9.png';
         break;
 
       case 10:
-        imagePath = 'graphics/ic_10.png';
+        imagePath = '$IMAGE_ASSET_PATH/ic_10.png';
         break;
     }
 
@@ -240,24 +241,24 @@ class SelectRoleCard implements SelectCard {
   @override
   String getImagePath(int cardNumber) {
     var imagePath;
-    final basePath = 'graphics/roles';
+    final basePath = '$IMAGE_ASSET_PATH/roles';
     final role = _roles[cardNumber];
 
     switch (role) {
       case GameRole.CITIZEN:
-        imagePath = 'graphics/ic_citizen.png';
+        imagePath = '$IMAGE_ASSET_PATH/ic_citizen.png';
         break;
 
       case GameRole.MAFIA:
-        imagePath = 'graphics/ic_maf.png';
+        imagePath = '$IMAGE_ASSET_PATH/ic_maf.png';
         break;
 
       case GameRole.DON:
-        imagePath = 'graphics/ic_don.png';
+        imagePath = '$IMAGE_ASSET_PATH/ic_don.png';
         break;
 
       case GameRole.SHERIFF:
-        imagePath = 'graphics/ic_sheriff.png';
+        imagePath = '$IMAGE_ASSET_PATH/ic_sheriff.png';
         break;
     }
 
